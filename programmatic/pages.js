@@ -56,7 +56,7 @@ function mi(t, u) {
 function doHeader($body) {
   let $header = document.createElement("header");
   let $logo = getLogo();
-  $logo.addEventListener("click", function () { window.location.href = "/index.html" + window.location.search; });
+  $logo.addEventListener("click", function () { window.location.href = "/" + window.location.search; });
   $header.append($logo);
   $body.insertBefore($header, $body.firstChild);
 
@@ -88,7 +88,7 @@ function doHeader($body) {
   let m2 = mi("Ürünlerimiz", "/urunlerimiz.html");
   let m3 = mi("Lezzetimizin Hikayesi", "/lezzetimizin-hikayesi.html");
   let m4 = mi("İletişim", "/iletisim.html");
-  if (IS_MOBILE) {
+  if (IS_M) {
     $menu.append(m);
     m1.className = m2.className = m3.className = m4.className = "close";
 

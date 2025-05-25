@@ -3,8 +3,16 @@ var COMPANY;
 var SITE;
 var BASKET = [];
 
-var IS_MOBILE = /Mobi|Android/i.test(navigator.userAgent) && window.innerWidth < 768;
+var IS_M = window.innerWidth < 777;
 var IS_HOME = window.location.pathname == "/" || window.location.pathname.includes("/index.html");
+var IS_MOBILE = (function () {
+  var dataString = [navigator.userAgent, navigator.vendor, navigator.platform, window.opera, ''].join(' ');
+  var mobileRegex = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini|Mobile|Mobi|iOS|CriOS|FxiOS|CFNetwork|UCBrowser|Silk|Kindle|Tablet|Mac.*Mobile|MacIntel|Phone|samsung|SAMSUNG/i;
+  var isMobileDevice = mobileRegex.test(dataString);
+  var hasTouchPoints = navigator.maxTouchPoints > 0;
+  var hasTouchEvents = 'ontouchstart' in window || 'ontouchend' in document;
+  return isMobileDevice || hasTouchPoints || hasTouchEvents;
+})();
 
 document.addEventListener("DOMContentLoaded", function () {
   COMPANY = getData("company");
@@ -17,7 +25,7 @@ document.addEventListener("DOMContentLoaded", function () {
   let $m = document.createElement("main");
   if (IS_HOME) {
     let part = imgWithBtn("/static/img/pages/header.jpg", SITE.headSloganBtn, SITE.headSloganLnk, [SITE.headImgSloganStart, SITE.headImgSloganEnd]);
-    if (IS_MOBILE) { part.style.marginTop = "-128px"; }
+    if (IS_M) { part.style.marginTop = "-128px"; }
     else { part.style.marginTop = "-48px"; }
     $body.append(part);
   }
@@ -310,7 +318,7 @@ function calcShip(w) {
   else { return 0; }
 }
 
-function refreshBasket() {
+function getTotals() {
   let total = 0;
   let qp = [];
   let w = 0;
@@ -320,7 +328,11 @@ function refreshBasket() {
     let numPart = parseInt(p.id.replace(/\D/g, ""), 10);
     w += (numPart / 1000) * p.quantity;
   });
+  return { total, qp, w };
+}
 
+function refreshBasket() {
+  let { total, qp, w } = getTotals();
   history.replaceState(null, "", `?${qp.join("&")}`);
 
   let $bi = document.getElementById("basketInfo");
@@ -350,7 +362,7 @@ function refreshBasket() {
     $pTotal.textContent = "Ürün Tutarı : " + formatPrice(total) + " (KDV Dahil)";
     frag.append($pTotal);
 
-    let $e = em("15 kg ve üzeri siparişlerde kargo bedavadır.");
+    let $e = em("15 kg ve üzeri siparişlerde kargo ücretsizdir.");
     $e.style.fontSize = "13px";
     $e.style.color = "#333";
     $e.style.paddingBottom = "8px";
@@ -377,16 +389,27 @@ function refreshBasket() {
     let $bw = btn("Whatsapp'dan Siparişini İlet");
     $bw.id = "btnOrderFromWhatsapp";
     $bw.addEventListener("click", function () {
-      let phone = COMPANY.phone;
+      let phone = COMPANY.phone.replace(/\D/g, "");
       let message = "Merhaba,\n\n";
-      BASKET.forEach(function (p) { message += `${p.quantity} ${p.name}\n`; });
-      message += "\nSatın almak istiyorum.";
+      BASKET.forEach(function (p) { message += `${p.quantity} ${p.name} (${p.price} x ${p.quantity})\n`; });
+
+      let { total, qp, w } = getTotals();
+      let ship = calcShip(w);
+      message += "\nÜrün Tutarı : " + formatPrice(total);
+      message += "\nKargo Ücreti :" + formatPrice(ship);
+      message += "\nGenel Toplam :" + formatPrice(total + ship);
+      message += "\n\nSatın almak istiyorum.";
 
       let encoded = encodeURIComponent(message);
+
       if (IS_MOBILE) { window.open(`https://wa.me/${phone}?text=${encoded}`, "_blank"); }
       else { window.open(`https://web.whatsapp.com/send?phone=${phone}&text=${encoded}`, "_blank"); }
     });
     frag.append($bw);
+
+    let no_wa = p2("WhatsApp kullanmıyorsanız,<br/>sipariş ve sorularınız için bize <a target='_blank' href='mailto:info@ozumgida.com'>info@ozumgida.com</a> adresimizden ulaşabilirsiniz.") ;
+    no_wa.id = "no_wa";
+    frag.append(no_wa);
 
     $b.append(frag);
 
@@ -459,7 +482,7 @@ function hideBasket() {
   let b = document.getElementById("btnShowBasket");
   b.dataset.active = "false";
   b.innerHTML = "Sepeti Göster";
-  p.style.height = IS_MOBILE ? "260px" : "220px";
+  p.style.height = IS_M ? "260px" : "220px";
 }
 
 function formatPrice(price) { return price.toLocaleString("tr-TR") + " TL"; }
@@ -521,7 +544,7 @@ function mi(t, u) {
 function doHeader($body) {
   let $header = document.createElement("header");
   let $logo = getLogo();
-  $logo.addEventListener("click", function () { window.location.href = "/index.html" + window.location.search; });
+  $logo.addEventListener("click", function () { window.location.href = "/" + window.location.search; });
   $header.append($logo);
   $body.insertBefore($header, $body.firstChild);
 
@@ -553,7 +576,7 @@ function doHeader($body) {
   let m2 = mi("Ürünlerimiz", "/urunlerimiz.html");
   let m3 = mi("Lezzetimizin Hikayesi", "/lezzetimizin-hikayesi.html");
   let m4 = mi("İletişim", "/iletisim.html");
-  if (IS_MOBILE) {
+  if (IS_M) {
     $menu.append(m);
     m1.className = m2.className = m3.className = m4.className = "close";
 

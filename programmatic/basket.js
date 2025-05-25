@@ -93,7 +93,7 @@ function calcShip(w) {
   else { return 0; }
 }
 
-function refreshBasket() {
+function getTotals() {
   let total = 0;
   let qp = [];
   let w = 0;
@@ -103,7 +103,11 @@ function refreshBasket() {
     let numPart = parseInt(p.id.replace(/\D/g, ""), 10);
     w += (numPart / 1000) * p.quantity;
   });
+  return { total, qp, w };
+}
 
+function refreshBasket() {
+  let { total, qp, w } = getTotals();
   history.replaceState(null, "", `?${qp.join("&")}`);
 
   let $bi = document.getElementById("basketInfo");
@@ -133,7 +137,7 @@ function refreshBasket() {
     $pTotal.textContent = "Ürün Tutarı : " + formatPrice(total) + " (KDV Dahil)";
     frag.append($pTotal);
 
-    let $e = em("15 kg ve üzeri siparişlerde kargo bedavadır.");
+    let $e = em("15 kg ve üzeri siparişlerde kargo ücretsizdir.");
     $e.style.fontSize = "13px";
     $e.style.color = "#333";
     $e.style.paddingBottom = "8px";
@@ -160,16 +164,27 @@ function refreshBasket() {
     let $bw = btn("Whatsapp'dan Siparişini İlet");
     $bw.id = "btnOrderFromWhatsapp";
     $bw.addEventListener("click", function () {
-      let phone = COMPANY.phone;
+      let phone = COMPANY.phone.replace(/\D/g, "");
       let message = "Merhaba,\n\n";
-      BASKET.forEach(function (p) { message += `${p.quantity} ${p.name}\n`; });
-      message += "\nSatın almak istiyorum.";
+      BASKET.forEach(function (p) { message += `${p.quantity} ${p.name} (${p.price} x ${p.quantity})\n`; });
+
+      let { total, qp, w } = getTotals();
+      let ship = calcShip(w);
+      message += "\nÜrün Tutarı : " + formatPrice(total);
+      message += "\nKargo Ücreti :" + formatPrice(ship);
+      message += "\nGenel Toplam :" + formatPrice(total + ship);
+      message += "\n\nSatın almak istiyorum.";
 
       let encoded = encodeURIComponent(message);
+
       if (IS_MOBILE) { window.open(`https://wa.me/${phone}?text=${encoded}`, "_blank"); }
       else { window.open(`https://web.whatsapp.com/send?phone=${phone}&text=${encoded}`, "_blank"); }
     });
     frag.append($bw);
+
+    let no_wa = p2("WhatsApp kullanmıyorsanız,<br/>sipariş ve sorularınız için bize <a target='_blank' href='mailto:info@ozumgida.com'>info@ozumgida.com</a> adresimizden ulaşabilirsiniz.") ;
+    no_wa.id = "no_wa";
+    frag.append(no_wa);
 
     $b.append(frag);
 
@@ -242,7 +257,7 @@ function hideBasket() {
   let b = document.getElementById("btnShowBasket");
   b.dataset.active = "false";
   b.innerHTML = "Sepeti Göster";
-  p.style.height = IS_MOBILE ? "260px" : "220px";
+  p.style.height = IS_M ? "260px" : "220px";
 }
 
 function formatPrice(price) { return price.toLocaleString("tr-TR") + " TL"; }

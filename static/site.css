@@ -332,6 +332,7 @@ strong em {
 
 #products img {
   width: 444px;
+  max-width: 95%;
   margin: 13px;
   border-radius: 21px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
@@ -498,6 +499,18 @@ li button img {
   width: 34px;
   height: 34px;
   margin-bottom: 0;
+}
+
+#no_wa {
+  color: #fff;
+  font-size: 13px;
+  margin-top: 15px;
+}
+
+#no_wa a {
+  color: #3E8E41;
+  text-decoration: underline;
+  text-underline-offset: 3px;
 }
 
 @media (max-width: 768px) {
