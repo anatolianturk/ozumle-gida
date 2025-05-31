@@ -748,7 +748,7 @@ function doSiteHaritasi($m) {
 }
 function getLangFromSubdomain() {
   const subdomain = window.location.hostname.split(".")[0];
-  return ["tr", "en"].includes(subdomain) ? subdomain : "en"; // default to 'en'
+  return ["tr", "en"].includes(subdomain) ? subdomain : "tr"; // default to 'tr'
 }
 
 function mi(textKey, url) {
