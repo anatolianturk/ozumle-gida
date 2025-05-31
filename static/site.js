@@ -660,7 +660,8 @@ function showBasket() {
   let p = document.getElementById("basket");
   let b = document.getElementById("btnShowBasket");
   b.dataset.active = "true";
-  b.innerHTML = "Sepeti Gizle";
+  const hideBasketText = lang.btns.hideBasket;
+  b.innerHTML = hideBasketText;
   p.style.height = "fit-content";
 }
 
@@ -668,7 +669,8 @@ function hideBasket() {
   let p = document.getElementById("basket");
   let b = document.getElementById("btnShowBasket");
   b.dataset.active = "false";
-  b.innerHTML = "Sepeti Göster";
+  const showBasketText = lang.btns.showBasket;
+  b.innerHTML = showBasketText;
   p.style.height = IS_MOBILE ? "260px" : "220px";
 }
 
