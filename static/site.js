@@ -48,6 +48,11 @@ const translations = {
       shippingFree: "Kargonuz ücretsiz.",
       grandTotal: "Genel Toplam",
     },
+    errors: {
+      pageNotFoundTitle: "Sayfa Bulunamadı",
+      pageNotFoundMessage:
+        "Aradığınız sayfa bulunamadı. Lütfen menüden başka bir sayfayı seçin.",
+    },
   },
   en: {
     menu: {
@@ -86,6 +91,11 @@ const translations = {
       shippingTaxNote: " TL (Including Taxes)",
       shippingFree: "Your shipping is free",
       grandTotal: "Grand Total",
+    },
+    errors: {
+      pageNotFoundTitle: "Page Not Found",
+      pageNotFoundMessage:
+        "The page you are looking for was not found. Please select another page from the menu.",
     },
   },
 };
@@ -681,12 +691,9 @@ function do404($m) {
   let a = article();
   let i = img("/static/img/pages/404.jpg", "Sayfa Bulunamadı");
   i.style.objectPosition = "center";
-  a.append(
-    h2("Sayfa Bulunamadı"),
-    i,
-    p("Aradığınız sayfa bulunamadı. Lütfen menüden başka bir sayfayı seçin."),
-    br()
-  );
+  const pageNotFoundTitle = lang.errors.pageNotFoundTitle;
+  const pageNotFoundMessage = lang.errors.pageNotFoundMessage;
+  a.append(h2(pageNotFoundTitle), i, p(pageNotFoundMessage), br());
   $m.append(a);
   return a;
 }
