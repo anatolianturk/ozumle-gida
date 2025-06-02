@@ -25,13 +25,6 @@ var IS_MOBILE = (function () {
 
 let localeData = getData("site").localeData;
 
-function getLangFromSubdomain() {
-  let subdomain = window.location.hostname.split(".")[0];
-  return ["tr", "en"].includes(subdomain) ? subdomain : "en"; // default to 'en'
-}
-
-let currentLang = getLangFromSubdomain();
-
 document.addEventListener("DOMContentLoaded", function () {
   COMPANY = getData("company");
   PRODUCTS = getData("products").products;
