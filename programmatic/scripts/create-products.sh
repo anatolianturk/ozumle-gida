@@ -1,8 +1,8 @@
 #!/bin/bash
 
 LANGUAGES=("tr" "en")
-DIST_BASE="../../dist"
-DATA_BASE="../../data"
+DIST_BASE="./data/"
+DATA_BASE="./data"
 
 generate_html() {
     local lang="$1"

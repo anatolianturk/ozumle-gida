@@ -4,7 +4,6 @@ LANGUAGES=("tr" "en")
 
 rm -rf ../../dist && mkdir -p ../../dist
 
-# HTML base content template
 generate_html() {
     local lang="$1"
     local title="$2"
@@ -39,9 +38,8 @@ extract_value() {
 }
 
 for lang in "${LANGUAGES[@]}"; do
-    site_json_path="../../data/
-    $lang/site.json"
-    
+    site_json_path="./data/${lang}/site.json"
+
     if [ ! -f "$site_json_path" ]; then
         echo "⚠️ Warning: $site_json_path not found, skipping $lang"
         continue
@@ -56,6 +54,10 @@ for lang in "${LANGUAGES[@]}"; do
         title=$(extract_value "$site_json" "title" "$page")
         description=$(extract_value "$site_json" "description" "$page")
         keywords=$(extract_value "$site_json" "keywords" "$page")
+
+        title="${title:-Untitled}"
+        description="${description:-No description}"
+        keywords="${keywords:-}"
 
         echo "📄 Generating page: $page ($lang)"
         
