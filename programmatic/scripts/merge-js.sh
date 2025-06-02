@@ -1,14 +1,14 @@
 #!/bin/bash
 
 # Read 
-helper_content=$(cat ../helper.js)
-basket_content=$(cat ../basket.js)
-pages_content=$(cat ../pages.js)
-product_content=$(cat ../product.js)
-main_content=$(cat ../main.js)
+helper_content=$(cat ./programmatic/helper.js)
+basket_content=$(cat ./programmatic/basket.js)
+pages_content=$(cat ./programmatic/pages.js)
+product_content=$(cat ./programmatic/product.js)
+main_content=$(cat ./programmatic/main.js)
 
 # Merge
-output_file="../../static/site.js"
+output_file="./static/site.js"
 echo "$main_content" > "$output_file"
 echo "$helper_content" >> "$output_file"
 echo "$basket_content" >> "$output_file"
