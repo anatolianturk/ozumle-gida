@@ -59,5 +59,48 @@
   "headSloganLnk": "/urunlerimiz.html",
   "footSloganBtn": "Our Flavor Story",
   "footSloganLnk": "/lezzetimizin-hikayesi.html",
-  "basketWarning": "After adding products to your cart,<br/>click the 'Send Order via WhatsApp' button<br/>to quickly send your order and shipping details to us,<br/>and complete your shopping with ease."
+  "basketWarning": "After adding products to your cart,<br/>click the 'Send Order via WhatsApp' button<br/>to quickly send your order and shipping details to us,<br/>and complete your shopping with ease.",
+  "localeData": {
+    "menu": {
+      "about": "About Us",
+      "products": "Our Products",
+      "story": "Our Story",
+      "contact": "Contact"
+    },
+    "links": {
+      "map": "View on Map",
+      "home": "Home",
+      "products": "Our Products",
+      "about": "About Us",
+      "story": "Our Flavor Story",
+      "distanceSales": "Distance Sales Agreement",
+      "privacy": "Privacy Policy",
+      "kvkk": "KVKK Information Notice",
+      "contact": "Contact",
+      "distanceSalesAlt": "Remote Sales Agreement",
+      "privacyAlt": "Privacy Policy",
+      "sitemap": "Site Map"
+    },
+    "btns": {
+      "addToBasket": "Add to Basket",
+      "hideBasket": "Hide Basket",
+      "showBasket": "Show Basket",
+      "emptyBasket": "Empty Basket",
+      "quantity": "Quantity",
+      "orderViaWhatsapp": "Send Your Order via WhatsApp"
+    },
+    "cart": {
+      "productTotal": "Product Total",
+      "vatIncluded": "(VAT Included)",
+      "freeShippingNote": "Free shipping for orders 15 kg and above.",
+      "shippingCost": "Shipping Cost:",
+      "shippingTaxNote": " TL (Including Taxes)",
+      "shippingFree": "Your shipping is free",
+      "grandTotal": "Grand Total"
+    },
+    "errors": {
+      "pageNotFoundTitle": "Page Not Found",
+      "pageNotFoundMessage": "The page you are looking for was not found. Please select another page from the menu."
+    }
+  }
 }

@@ -59,5 +59,48 @@
   "headSloganLnk": "/urunlerimiz.html",
   "footSloganBtn": "Lezetimizin Hikayesi",
   "footSloganLnk": "/lezzetimizin-hikayesi.html",
-  "basketWarning": "Ürünlerinizi sepete ekledikten sonra,<br/>'WhatsApp'tan Siparişini İlet' butonuna tıklayarak<br/>siparişinizi ve kargo bilgilerinizi tarafımıza hızlıca iletebilir,<br/>alışverişinizi kolayca tamamlayabilirsiniz."
+  "basketWarning": "Ürünlerinizi sepete ekledikten sonra,<br/>'WhatsApp'tan Siparişini İlet' butonuna tıklayarak<br/>siparişinizi ve kargo bilgilerinizi tarafımıza hızlıca iletebilir,<br/>alışverişinizi kolayca tamamlayabilirsiniz.",
+  "localeData": {
+    "menu": {
+      "about": "Hakkımızda",
+      "products": "Ürünlerimiz",
+      "story": "Lezzetimizin Hikayesi",
+      "contact": "İletişim"
+    },
+    "links": {
+      "map": "Haritada Gör",
+      "home": "Anasayfa",
+      "products": "Ürünlerimiz",
+      "about": "Hakkımızda",
+      "story": "Lezzetimizin Hikayesi",
+      "distanceSales": "Mesafeli Satış Sözleşmesi",
+      "privacy": "Gizlilik Politikası",
+      "kvkk": "KVKK Aydınlatma Metni",
+      "contact": "İletişim",
+      "distanceSalesAlt": "Uzaktan Satış Sözleşmesi",
+      "privacyAlt": "Gizlilik Politikası",
+      "sitemap": "Site Haritası"
+    },
+    "btns": {
+      "addToBasket": "Sepete Ekle",
+      "hideBasket": "Sepeti Gizle",
+      "showBasket": "Sepeti Göster",
+      "emptyBasket": "Sepeti Boşalt",
+      "quantity": "Adet",
+      "orderViaWhatsapp": "Whatsapp'dan Siparişini İlet"
+    },
+    "cart": {
+      "productTotal": "Ürün Tutarı",
+      "vatIncluded": "(KDV Dahil)",
+      "freeShippingNote": "15 kg ve üzeri siparişlerde kargo bedavadır.",
+      "shippingCost": "Kargo Ücreti:",
+      "shippingTaxNote": " TL (Vergiler Dahil)",
+      "shippingFree": "Kargonuz ücretsiz.",
+      "grandTotal": "Genel Toplam"
+    },
+    "errors": {
+      "pageNotFoundTitle": "Sayfa Bulunamadı",
+      "pageNotFoundMessage": "Aradığınız sayfa bulunamadı. Lütfen menüden başka bir sayfayı seçin."
+    }
+  }
 }

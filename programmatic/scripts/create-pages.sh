@@ -1,6 +1,6 @@
 #!/bin/bash
 
-LANGUAGES=("tr" "en")
+LANGUAGES=($(find ./data -maxdepth 1 -mindepth 1 -type d -exec basename {} \;))
 
 rm -rf ../../dist && mkdir -p ../../dist
 
